@@ -1,0 +1,122 @@
+/* Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6; /* Um fundo levemente esverdeado acinzentado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Principal */
+.login-container, .card-cadastro {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+    border-top: 5px solid #28a745; /* Linha verde no topo para destaque */
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #1e7e34; /* Verde floresta */
+    font-size: 26px;
+    letter-spacing: -1px;
+}
+
+header p {
+    color: #6c757d;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Campos de Entrada */
+.input-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.input-group input {
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+    outline: none;
+}
+
+/* Mensagens de Erro */
+.error-msg {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 6px;
+    display: none;
+    font-weight: 500;
+}
+
+/* Botão Principal Verde */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #28a745; /* Verde padrão sucesso/saúde */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Links */
+.link-cadastro, .link-login {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.link-cadastro a, .link-login a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.link-cadastro a:hover, .link-login a:hover {
+    text-decoration: underline;
+}
