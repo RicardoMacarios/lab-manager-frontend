@@ -1,4 +1,3 @@
-// --- LÓGICA DE LOGIN ---
 const loginForm = document.getElementById('loginForm');
 
 if (loginForm) {
@@ -28,28 +27,8 @@ if (loginForm) {
 
         if (isValid) {
             alert("Login realizado com sucesso!");
-            // Se a dashboard estiver na raiz (fora da pasta login)
-            window.location.href = "../dashboard.html"; 
+            // SAI da pasta login e ENTRA na dashboard
+            window.location.href = "../dashboard/inicio.html"; 
         }
-    });
-}
-
-// --- LÓGICA DE CADASTRO ---
-const formCad = document.getElementById('formCadastro');
-
-if (formCad) {
-    formCad.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const senha = document.getElementById('senha').value;
-        const confirma = document.getElementById('confirmarSenha').value;
-
-        if (senha !== confirma) {
-            alert("As senhas não coincidem!");
-            return;
-        }
-
-        alert("Cadastro realizado com sucesso!");
-        window.location.href = "login.html"; 
     });
 }
