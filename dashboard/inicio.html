@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-Manager | Simples</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="inicio.css">
+</head>
+<body class="bg-[#020617] text-slate-300 font-sans antialiased">
+
+    <div id="launcher-screen" class="min-h-screen flex flex-col items-center justify-center p-6">
+        <header class="text-center mb-16">
+            <p class="text-emerald-500 font-mono text-[10px] tracking-[0.3em] uppercase mb-2">Gerenciamento de Valvulas</p>
+            <h1 class="text-2xl font-light text-white tracking-widest uppercase">Selecione o Ativo</h1>
+        </header>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+            
+            <button onclick="openDashboard('Esfera')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="12" cy="12" r="8"/>
+                    <path d="M12 4v16M4 12h16"/>
+                </svg>
+                <span>Esfera</span>
+            </button>
+
+            <button onclick="openDashboard('Borboleta')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="12" cy="12" r="8"/>
+                    <ellipse cx="12" cy="12" rx="2" ry="6"/>
+                </svg>
+                <span>Borboleta</span>
+            </button>
+
+            <button onclick="openDashboard('Gaveta')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M7 19h10M12 19V9M8 5h8M12 5V3"/>
+                    <rect x="7" y="9" width="10" height="6"/>
+                </svg>
+                <span>Gaveta</span>
+            </button>
+
+            <button onclick="openDashboard('Globo')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="12" cy="12" r="8"/>
+                    <path d="M8 12h8M12 8v8" transform="rotate(45 12 12)"/>
+                </svg>
+                <span>Globo</span>
+            </button>
+
+            <button onclick="openDashboard('Retenção')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M5 12h14M15 8l4 4-4 4"/>
+                </svg>
+                <span>Retenção</span>
+            </button>
+
+            <button onclick="openDashboard('Diafragma')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M4 15c4-6 12-6 16 0M12 9v6"/>
+                </svg>
+                <span>Diafragma</span>
+            </button>
+
+            <button onclick="openDashboard('Guilhotina')" class="valve-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <rect x="8" y="4" width="8" height="16"/>
+                    <path d="M8 10h8"/>
+                </svg>
+                <span>Guilhotina</span>
+            </button>
+
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="hidden p-8">
+        <button onclick="goBack()" class="text-xs tracking-widest text-emerald-500 mb-8 border border-emerald-500/30 px-4 py-2 hover:bg-emerald-500 hover:text-black transition-all">VOLTAR</button>
+        <h2 id="dash-title" class="text-3xl font-extralight text-white uppercase tracking-tighter">Dashboard</h2>
+    </div>
+
+    <script src="inicio.js"></script>
+</body>
+</html>

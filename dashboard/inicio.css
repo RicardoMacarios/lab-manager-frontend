@@ -1,0 +1,42 @@
+/* Menos brilho, mais elegância */
+body {
+    background-color: #020617;
+    background-image: radial-gradient(at 0% 0%, hsla(160, 84%, 39%, 0.05) 0, transparent 50%);
+}
+
+.valve-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px; /* Bordas menos arredondadas ficam mais sérias */
+    transition: all 0.2s ease-in-out;
+}
+
+.valve-btn svg {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 1rem;
+    color: rgba(16, 185, 129, 0.6);
+    transition: color 0.2s;
+}
+
+.valve-btn span {
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.valve-btn:hover {
+    background: rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateY(-2px);
+}
+
+.valve-btn:hover svg {
+    color: #10b981;
+}
