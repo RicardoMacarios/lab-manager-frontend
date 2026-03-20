@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-Manager | Simples</title>
+    <title>V-Manager | Início</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="inicio.css">
 </head>
-<body class="bg-[#020617] text-slate-300 font-sans antialiased">
+<body class="bg-[#e8f5e9] text-[#1b5e20] font-sans antialiased">
 
     <div id="launcher-screen" class="min-h-screen flex flex-col items-center justify-center p-6">
         <header class="text-center mb-16">
-            <p class="text-emerald-500 font-mono text-[10px] tracking-[0.3em] uppercase mb-2">Gerenciamento de Valvulas</p>
-            <h1 class="text-2xl font-light text-white tracking-widest uppercase">Selecione o Ativo</h1>
+            <p class="text-[#388e3c] font-mono text-[10px] tracking-[0.3em] uppercase mb-2">Gerenciamento de Válvulas</p>
+            <h1 class="text-2xl font-light text-[#1b5e20] tracking-widest uppercase">Selecione o Ativo</h1>
+            <div class="h-[1px] w-12 bg-[#4caf50] mx-auto mt-3"></div>
         </header>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
-            
+
             <button onclick="openDashboard('Esfera')" class="valve-btn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                     <circle cx="12" cy="12" r="8"/>
@@ -33,14 +34,7 @@
                 <span>Borboleta</span>
             </button>
 
-           
-        
         </div>
-    </div>
-
-    <div id="dashboard-screen" class="hidden p-8">
-        <button onclick="goBack()" class="text-xs tracking-widest text-emerald-500 mb-8 border border-emerald-500/30 px-4 py-2 hover:bg-emerald-500 hover:text-black transition-all">VOLTAR</button>
-        <h2 id="dash-title" class="text-3xl font-extralight text-white uppercase tracking-tighter">Dashboard</h2>
     </div>
 
     <script src="inicio.js"></script>

@@ -5,6 +5,5 @@ function voltar() {
 }
 
 function abrirSetor(setor) {
-    console.log("Setor selecionado: " + setor);
-    alert("Setor: " + setor);
+    window.location.href = `../setor/setor.html?tipo=Esfera&setor=${encodeURIComponent(setor)}`;
 }
