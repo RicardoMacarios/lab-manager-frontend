@@ -126,6 +126,11 @@ textarea.form-input {
     height: 150px;
 }
 
+/* ---- Variação larga do modal (histórico) ---- */
+.modal-box--wide {
+    max-width: 560px;
+}
+
 /* ---- Imagem de assinatura salva ---- */
 #assin-img {
     width: 100%;
