@@ -151,6 +151,7 @@ function renderCard(v) {
                     <h3 class="text-[#1b5e20] uppercase tracking-widest text-sm font-medium leading-snug">${v.nome}</h3>
                     ${infoSecundaria ? `<p class="text-[#388e3c] text-xs mt-0.5">${infoSecundaria}</p>` : ''}
                     ${v.observacoes ? `<p class="text-[#4caf50] text-xs italic mt-1">${v.observacoes}</p>` : ''}
+                    ${v.recebido_por ? `<p class="text-[10px] tracking-wider text-[#388e3c] uppercase mt-1">Recebido por: <span class="text-[#1b5e20] normal-case">${v.recebido_por}</span></p>` : ''}
                 </div>
                 <span class="inline-block shrink-0 px-2 py-0.5 text-[9px] tracking-widest uppercase border rounded-full ${classesBadge(v.status)}">
                     ${labelStatus(v.status)}
@@ -159,9 +160,6 @@ function renderCard(v) {
             <div class="flex items-center justify-between gap-2 flex-wrap pt-2 border-t border-[#a5d6a7]">
                 <div class="flex items-center gap-2 flex-wrap">
                     ${acaoRetirada}
-                    <button class="btn-receber text-[10px] tracking-widest uppercase border border-[#388e3c] text-[#2e7d32] px-3 py-1 hover:bg-[#c8e6c9] transition-all cursor-pointer" data-id="${v.id}">
-                        Receber
-                    </button>
                 </div>
                 <div class="flex items-center gap-2">
                     <button class="btn-historico text-[#2e7d32] hover:text-[#1b5e20] transition-colors" data-id="${v.id}" title="Ver histórico">
@@ -296,10 +294,11 @@ async function salvarCadastro(e) {
 
     const { data: inserted, error } = await supabase.from('valvulas').insert({
         nome,
-        marca:       document.getElementById('cad-marca').value.trim()       || null,
-        polegada:    document.getElementById('cad-polegada').value.trim()    || null,
-        status:      document.getElementById('cad-status').value,
-        observacoes: document.getElementById('cad-observacoes').value.trim() || null,
+        marca:        document.getElementById('cad-marca').value.trim()       || null,
+        polegada:     document.getElementById('cad-polegada').value.trim()    || null,
+        status:       document.getElementById('cad-status').value,
+        observacoes:  document.getElementById('cad-observacoes').value.trim() || null,
+        recebido_por: recebidoPor,
         tipo:  TIPO,
         setor: SETOR,
     }).select('id').single()
@@ -511,9 +510,13 @@ async function confirmarRecebimento(e) {
     const dataInput   = document.getElementById('receb-data').value
     const dataReceb   = dataInput ? new Date(dataInput).toISOString() : new Date().toISOString()
 
-    // Atualizar status da válvula para "Em manutenção"
+    // Atualizar status da válvula para "Em manutenção" e registrar quem recebeu
     const { error } = await supabase.from('valvulas').update({
-        status: 'Em manutenção',
+        status:                     'Em manutenção',
+        recebido_por:               responsavel,
+        retirada_por:               null,
+        retirada_assinatura_base64: null,
+        retirada_data:              null,
     }).eq('id', id)
 
     if (error) {
