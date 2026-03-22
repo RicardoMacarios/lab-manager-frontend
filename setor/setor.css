@@ -1,0 +1,140 @@
+body {
+    background-color: #e8f5e9;
+}
+
+/* ---- Cards de resumo (estatísticas) ---- */
+.stat-card {
+    background: #c8e6c9;
+    border: 1px solid #66bb6a;
+    border-radius: 4px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #388e3c;
+    margin-bottom: 0.35rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+/* ---- Cards de válvula ---- */
+.card {
+    background: #c8e6c9;
+    border: 1px solid #66bb6a;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.card:hover {
+    border-color: #388e3c;
+}
+
+/* ---- Overlays de modal ---- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 50;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+/* ---- Caixa interna do modal ---- */
+.modal-box {
+    background: #e8f5e9;
+    border: 1px solid #66bb6a;
+    border-radius: 4px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ---- Inputs e selects ---- */
+.form-input {
+    width: 100%;
+    background: #c8e6c9;
+    border: 1px solid #66bb6a;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    color: #1b5e20;
+    outline: none;
+    transition: border-color 0.2s ease;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    border-color: #2e7d32;
+    background: #a5d6a7;
+}
+
+.form-input::placeholder {
+    color: #4caf50;
+}
+
+select.form-input option {
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+textarea.form-input {
+    resize: vertical;
+    min-height: 64px;
+}
+
+/* ---- Labels ---- */
+.form-label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #2e7d32;
+    margin-bottom: 0.35rem;
+}
+
+/* ---- Canvas de assinatura ---- */
+.canvas-container {
+    border: 1px solid #66bb6a;
+    border-radius: 4px;
+    background: #c8e6c9;
+    overflow: hidden;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+#canvas-assinatura {
+    display: block;
+    width: 100%;
+    height: 150px;
+}
+
+/* ---- Variação larga do modal (histórico) ---- */
+.modal-box--wide {
+    max-width: 560px;
+}
+
+/* ---- Imagem de assinatura salva ---- */
+#assin-img {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #66bb6a;
+    background: #c8e6c9;
+}
