@@ -21,28 +21,68 @@
     </header>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
-        <button class="menu-item" onclick="abrirSetor('Fermentação')">
-            <span>Fermentação</span>
-            <span class="icon">→</span>
+        <button class="menu-item" id="setor-fermentacao" onclick="abrirSetor('Fermentação')">
+            <div class="setor-info">
+                <span>Fermentação</span>
+                <span class="progresso-texto" id="prog-fermentacao">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-fermentacao"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
         </button>
-        <button class="menu-item" onclick="abrirSetor('Massa A')">
-            <span>Massa A</span>
-            <span class="icon">→</span>
+        <button class="menu-item" id="setor-massaa" onclick="abrirSetor('Massa A')">
+            <div class="setor-info">
+                <span>Massa A</span>
+                <span class="progresso-texto" id="prog-massaa">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-massaa"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
         </button>
-        <button class="menu-item" onclick="abrirSetor('Massa B')">
-            <span>Massa B</span>
-            <span class="icon">→</span>
+        <button class="menu-item" id="setor-massab" onclick="abrirSetor('Massa B')">
+            <div class="setor-info">
+                <span>Massa B</span>
+                <span class="progresso-texto" id="prog-massab">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-massab"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
         </button>
-        <button class="menu-item" onclick="abrirSetor('TRCA')">
-            <span>TRCA</span>
-            <span class="icon">→</span>
+        <button class="menu-item" id="setor-trca" onclick="abrirSetor('TRCA')">
+            <div class="setor-info">
+                <span>TRCA</span>
+                <span class="progresso-texto" id="prog-trca">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-trca"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
         </button>
-        <button class="menu-item" onclick="abrirSetor('Moenda')">
-            <span>Moenda</span>
-            <span class="icon">→</span>
+        <button class="menu-item" id="setor-moenda" onclick="abrirSetor('Moenda')">
+            <div class="setor-info">
+                <span>Moenda</span>
+                <span class="progresso-texto" id="prog-moenda">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-moenda"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
         </button>
     </div>
 
-    <script src="borboleta.js"></script>
+    <script type="module" src="borboleta.js"></script>
 </body>
 </html>

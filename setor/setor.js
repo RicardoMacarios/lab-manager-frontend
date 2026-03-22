@@ -60,10 +60,28 @@ async function carregarValvulas() {
     data.forEach(v => { valvulasMapa[v.id] = v })
     todasValvulas = data
 
-    const entregues = data.filter(v => !!v.retirada_por).length
-    document.getElementById('stat-total').textContent     = data.length
-    document.getElementById('stat-entregues').textContent = entregues
-    document.getElementById('stat-faltam').textContent    = data.length - entregues
+    const entregues    = data.filter(v => !!v.retirada_por).length
+    const manutencao   = data.filter(v => v.status === 'Em manutenção').length
+    const prontas      = data.filter(v => v.status === 'Pronta').length
+    const substituidas = data.filter(v => v.status === 'Substituída').length
+    const descartadas  = data.filter(v => v.status === 'Descartada').length
+
+    document.getElementById('stat-total').textContent       = data.length
+    document.getElementById('stat-entregues').textContent   = entregues
+    document.getElementById('stat-faltam').textContent      = data.length - entregues
+    document.getElementById('stat-manutencao').textContent  = manutencao
+    document.getElementById('stat-prontas').textContent     = prontas
+    document.getElementById('stat-substituidas').textContent = substituidas
+    document.getElementById('stat-descartadas').textContent = descartadas
+
+    const concluidas = data.filter(v => v.status === 'Pronta' || v.status === 'Entregue').length
+    const total      = data.length
+    const pct        = total > 0 ? Math.round((concluidas / total) * 100) : 0
+    document.getElementById('prog-barra').style.width = `${pct}%`
+    document.getElementById('prog-barra').style.background = pct === 100 ? '#1b5e20' : '#2e7d32'
+    document.getElementById('prog-texto').textContent = total > 0
+        ? `${concluidas} de ${total} concluída${concluidas !== 1 ? 's' : ''} · ${pct}%`
+        : 'sem registros'
 
     if (data.length === 0) {
         lista.innerHTML = '<p class="text-slate-700 text-[10px] tracking-widest uppercase col-span-full py-4">Nenhuma válvula cadastrada</p>'

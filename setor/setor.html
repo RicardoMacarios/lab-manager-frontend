@@ -27,18 +27,47 @@
         </header>
 
         <!-- Painel de resumo -->
-        <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="grid grid-cols-3 gap-3 mb-3">
             <div class="stat-card">
                 <p class="stat-label">Total</p>
                 <p id="stat-total" class="stat-value text-[#1b5e20]">—</p>
             </div>
             <div class="stat-card">
                 <p class="stat-label">Entregues</p>
-                <p id="stat-entregues" class="stat-value text-yellow-700">—</p>
+                <p id="stat-entregues" class="stat-value text-purple-700">—</p>
             </div>
             <div class="stat-card">
                 <p class="stat-label">No estoque</p>
                 <p id="stat-faltam" class="stat-value text-[#2e7d32]">—</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-4 gap-3 mb-6">
+            <div class="stat-card">
+                <p class="stat-label">Em manutenção</p>
+                <p id="stat-manutencao" class="stat-value text-yellow-700">—</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Prontas</p>
+                <p id="stat-prontas" class="stat-value text-[#2e7d32]">—</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Substituídas</p>
+                <p id="stat-substituidas" class="stat-value text-blue-700">—</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Descartadas</p>
+                <p id="stat-descartadas" class="stat-value text-red-700">—</p>
+            </div>
+        </div>
+
+        <!-- Barra de progresso de manutenção -->
+        <div class="mb-6">
+            <div class="flex justify-between items-baseline mb-1.5">
+                <span class="text-[9px] tracking-[0.2em] uppercase text-[#388e3c]">Progresso de Manutenção</span>
+                <span id="prog-texto" class="text-[9px] tracking-widest text-[#2e7d32]">—</span>
+            </div>
+            <div class="w-full h-[5px] bg-[#a5d6a7] rounded-full overflow-hidden">
+                <div id="prog-barra" class="h-full bg-[#2e7d32] rounded-full transition-all duration-500" style="width:0%"></div>
             </div>
         </div>
 
