@@ -75,7 +75,7 @@ async function carregarValvulas() {
     document.getElementById('stat-descartadas').textContent = descartadas
 
     const concluidas = data.filter(v => v.status === 'Entregue').length
-    const total      = data.length
+    const total      = data.filter(v => v.status !== 'Descartada').length
     const pct        = total > 0 ? Math.round((concluidas / total) * 100) : 0
     document.getElementById('prog-barra').style.width = `${pct}%`
     document.getElementById('prog-barra').style.background = pct === 100 ? '#1b5e20' : '#2e7d32'
@@ -146,7 +146,7 @@ function labelStatus(status) {
 function renderCard(v) {
     const infoSecundaria = [v.marca, v.polegada].filter(Boolean).join(' · ')
 
-    const acaoRetirada = v.retirada_por
+    const acaoRetirada = v.status === 'Descartada' ? '' : v.retirada_por
         ? `<div class="flex items-center gap-2">
                <span class="text-[10px] tracking-wider text-[#388e3c] uppercase">
                    Retirada por: <span class="text-[#1b5e20] normal-case">${v.retirada_por}</span>
