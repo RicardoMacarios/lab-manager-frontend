@@ -5,7 +5,7 @@ window.voltar = function() {
 }
 
 window.abrirSetor = function(setor) {
-    window.location.href = `../setor/setor.html?tipo=Esfera&setor=${encodeURIComponent(setor)}`;
+    window.location.href = `../setor/setor.html?tipo=Manual&setor=${encodeURIComponent(setor)}`;
 }
 
 const SETORES = [
@@ -20,7 +20,7 @@ async function carregarProgressos() {
     const { data, error } = await supabase
         .from('valvulas')
         .select('setor, status')
-        .eq('tipo', 'Esfera')
+        .eq('tipo', 'Manual')
 
     if (error || !data) return
 

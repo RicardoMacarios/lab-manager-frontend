@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-Manager | Setores Manual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="manual.css">
+</head>
+<body class="text-[#1b5e20] p-6 antialiased bg-[#e8f5e9]">
+
+    <button onclick="voltar()" class="text-[10px] tracking-widest text-[#2e7d32] mb-8 uppercase flex items-center gap-2 hover:text-[#1b5e20] transition-all cursor-pointer">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-width="2"/></svg>
+        Voltar ao Início
+    </button>
+
+    <header class="mb-10">
+        <p class="text-[#388e3c] font-mono text-[9px] tracking-[0.3em] uppercase mb-1">Tipo: Manual</p>
+        <h1 class="text-2xl font-light text-[#1b5e20] uppercase tracking-widest mb-2">Selecione o Setor</h1>
+        <div class="h-[1px] w-12 bg-[#4caf50]"></div>
+    </header>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
+        <button class="menu-item" id="setor-fermentacao" onclick="abrirSetor('Fermentação')">
+            <div class="setor-info">
+                <span>Fermentação</span>
+                <span class="progresso-texto" id="prog-fermentacao">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-fermentacao"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
+        </button>
+        <button class="menu-item" id="setor-massaa" onclick="abrirSetor('Massa A')">
+            <div class="setor-info">
+                <span>Massa A</span>
+                <span class="progresso-texto" id="prog-massaa">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-massaa"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
+        </button>
+        <button class="menu-item" id="setor-massab" onclick="abrirSetor('Massa B')">
+            <div class="setor-info">
+                <span>Massa B</span>
+                <span class="progresso-texto" id="prog-massab">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-massab"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
+        </button>
+        <button class="menu-item" id="setor-trca" onclick="abrirSetor('TRCA')">
+            <div class="setor-info">
+                <span>TRCA</span>
+                <span class="progresso-texto" id="prog-trca">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-trca"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
+        </button>
+        <button class="menu-item" id="setor-moenda" onclick="abrirSetor('Moenda')">
+            <div class="setor-info">
+                <span>Moenda</span>
+                <span class="progresso-texto" id="prog-moenda">—</span>
+            </div>
+            <div class="setor-right">
+                <div class="barra-container">
+                    <div class="barra-fill" id="barra-moenda"></div>
+                </div>
+                <span class="icon">→</span>
+            </div>
+        </button>
+    </div>
+
+    <script type="module" src="manual.js"></script>
+</body>
+</html>

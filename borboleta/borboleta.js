@@ -1,7 +1,7 @@
 import { supabase } from '../supabase.js'
 
 window.voltar = function() {
-    window.location.href = "../dashboard/inicio.html";
+    window.location.href = "../dashboard/inicio.html?secao=valvulas";
 }
 
 window.abrirSetor = function(setor) {
@@ -27,8 +27,8 @@ async function carregarProgressos() {
     const contagem = {}
     for (const v of data) {
         if (!contagem[v.setor]) contagem[v.setor] = { total: 0, concluidas: 0 }
-        contagem[v.setor].total++
-        if (v.status === 'Pronta' || v.status === 'Entregue') {
+        if (v.status !== 'Descartada') contagem[v.setor].total++
+        if (v.status === 'Entregue') {
             contagem[v.setor].concluidas++
         }
     }
