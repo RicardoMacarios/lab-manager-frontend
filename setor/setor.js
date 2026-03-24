@@ -74,7 +74,7 @@ async function carregarValvulas() {
     document.getElementById('stat-substituidas').textContent = substituidas
     document.getElementById('stat-descartadas').textContent = descartadas
 
-    const concluidas = data.filter(v => v.status === 'Pronta' || v.status === 'Entregue').length
+    const concluidas = data.filter(v => v.status === 'Entregue').length
     const total      = data.length
     const pct        = total > 0 ? Math.round((concluidas / total) * 100) : 0
     document.getElementById('prog-barra').style.width = `${pct}%`
@@ -309,6 +309,28 @@ async function salvarCadastro(e) {
     }
 
     const recebidoPor = document.getElementById('cad-recebido-por').value.trim() || null
+    if (!recebidoPor) {
+        erroEl.textContent = 'Informe quem recebeu a válvula.'
+        return
+    }
+
+    const { data: existe, error: erroVerif } = await supabase
+        .from('valvulas')
+        .select('id')
+        .eq('tipo', TIPO)
+        .eq('setor', SETOR)
+        .ilike('nome', nome)
+        .maybeSingle()
+
+    if (erroVerif) {
+        erroEl.textContent = erroVerif.message
+        return
+    }
+
+    if (existe) {
+        erroEl.textContent = 'Já existe uma válvula com esse nome neste setor.'
+        return
+    }
 
     const { data: inserted, error } = await supabase.from('valvulas').insert({
         nome,
@@ -370,6 +392,16 @@ async function salvarEdicao(e) {
 
     if (!alteradoPor) {
         erroEl.textContent = 'Informe quem está alterando.'
+        return
+    }
+
+    if (statusNovo === 'Entregue') {
+        erroEl.textContent = 'O status "Entregue" só pode ser atribuído ao registrar a retirada com assinatura.'
+        return
+    }
+
+    if ((statusNovo === 'Substituída' || statusNovo === 'Descartada') && !observacoes) {
+        erroEl.textContent = `Obrigatório informar o motivo para marcar como "${statusNovo}".`
         return
     }
 

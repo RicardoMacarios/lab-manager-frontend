@@ -28,7 +28,7 @@ async function carregarProgressos() {
     for (const v of data) {
         if (!contagem[v.setor]) contagem[v.setor] = { total: 0, concluidas: 0 }
         contagem[v.setor].total++
-        if (v.status === 'Pronta' || v.status === 'Entregue') {
+        if (v.status === 'Entregue') {
             contagem[v.setor].concluidas++
         }
     }
