@@ -7,16 +7,14 @@ let sedesMapa = {}
 let todasSedes = []
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('titulo-marca').textContent = MARCA
+    document.getElementById('titulo-marca').textContent  = MARCA
+    document.getElementById('label-marca').textContent   = `Marca: ${MARCA}`
+    document.getElementById('bread-marca').textContent   = MARCA
     document.title = `V-Manager | Sedes · ${MARCA}`
 
     carregarSedes()
     vincularEventos()
 })
-
-window.voltar = function() {
-    window.location.href = '../dashboard/inicio.html?secao=sedes'
-}
 
 // ============================================================
 // CARREGAR E RENDERIZAR
@@ -39,6 +37,12 @@ async function carregarSedes() {
     sedesMapa = {}
     data.forEach(s => { sedesMapa[s.id] = s })
     todasSedes = data
+
+    const totalEstoque = data.reduce((acc, s) => acc + (s.quantidade || 0), 0)
+    const critico      = data.filter(s => s.quantidade <= 5).length
+    document.getElementById('stat-total-sedes').textContent   = data.length
+    document.getElementById('stat-total-estoque').textContent = totalEstoque
+    document.getElementById('stat-critico').textContent       = critico
 
     renderizarLista()
 }
@@ -71,25 +75,44 @@ function renderizarLista() {
     })
 }
 
+const MAX_ESTOQUE = 30
+
+function statusSede(qtd) {
+    if (qtd <= 5)  return 'critico'
+    if (qtd <= 15) return 'baixo'
+    return 'normal'
+}
+
+function labelStatus(status) {
+    if (status === 'critico') return '<span class="status-tag status-critico">● Crítico</span>'
+    if (status === 'baixo')   return '<span class="status-tag status-baixo">● Baixo</span>'
+    return                           '<span class="status-tag status-normal">● Normal</span>'
+}
+
 function renderCard(s) {
-    const baixoEstoque = s.quantidade <= 5
+    const status  = statusSede(s.quantidade)
+    const pct     = Math.min(Math.round((s.quantidade / MAX_ESTOQUE) * 100), 100)
+
     return `
         <div class="sede-card">
-            <div class="sede-info">
-                <span class="text-[9px] tracking-[0.2em] uppercase text-[#4caf50]">Sede</span>
-                <span class="text-[#1b5e20] text-xl font-light tracking-widest">${s.polegada}</span>
-                <span class="text-[10px] tracking-widest text-[#388e3c] uppercase">${MARCA}</span>
+            <div class="sede-card-header">
+                <div class="sede-card-header-left">
+                    <span class="sede-meta-label">Sede · ${MARCA}</span>
+                    <span class="sede-polegada">${s.polegada}</span>
+                </div>
+                ${labelStatus(status)}
             </div>
-            <div class="sede-qtd">
-                <span class="qtd-valor ${baixoEstoque ? 'qtd-baixo' : ''}">${s.quantidade}</span>
-                <span class="qtd-label">em estoque</span>
-                <div class="flex gap-1 mt-1">
-                    <button class="btn-entrada text-[9px] tracking-widest uppercase border border-[#66bb6a] text-[#2e7d32] px-2 py-0.5 hover:bg-[#a5d6a7] transition-all cursor-pointer" data-id="${s.id}">
-                        + Entrada
-                    </button>
-                    <button class="btn-saida text-[9px] tracking-widest uppercase border border-red-400 text-red-600 px-2 py-0.5 hover:bg-red-50 transition-all cursor-pointer" data-id="${s.id}">
-                        − Saída
-                    </button>
+            <div class="sede-card-body">
+                <div class="estoque-linha">
+                    <span class="estoque-label">Em estoque</span>
+                    <span class="estoque-valor ${status}">${s.quantidade}</span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill ${status}" style="width:${pct}%"></div>
+                </div>
+                <div class="card-acoes">
+                    <button class="btn-entrada" data-id="${s.id}">＋ Entrada</button>
+                    <button class="btn-saida"   data-id="${s.id}">− Saída</button>
                 </div>
             </div>
         </div>

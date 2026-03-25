@@ -108,6 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const secaoInicial = new URLSearchParams(window.location.search).get('secao')
     if (secaoInicial) window.mostrarSecao(secaoInicial)
 
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+        await supabase.auth.signOut()
+        window.location.href = '../login/login.html'
+    })
+
     const sidebar  = document.getElementById('sidebar')
     const btnMenu  = document.getElementById('btn-menu')
     const overlay  = document.getElementById('overlay-sidebar')

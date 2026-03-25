@@ -26,6 +26,20 @@ body {
     transition: transform 0.25s ease;
 }
 
+.sidebar-footer {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-item-logout:hover {
+    background: rgba(220, 38, 38, 0.2) !important;
+    border-color: rgba(220, 38, 38, 0.4) !important;
+    color: #fca5a5 !important;
+}
+
 .sidebar-fechada {
     transform: translateX(-100%);
 }

@@ -27,9 +27,16 @@ let desenhando = false
 // INICIALIZAÇÃO
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('label-tipo').textContent = `Tipo: ${TIPO}`
+    document.getElementById('label-tipo').textContent  = `Tipo: ${TIPO}`
+    document.getElementById('label-setor').textContent = `Setor: ${SETOR}`
     document.getElementById('titulo-setor').textContent = SETOR
+    document.getElementById('bread-tipo').textContent  = TIPO
+    document.getElementById('bread-setor').textContent = SETOR
     document.title = `V-Manager | ${TIPO} · ${SETOR}`
+
+    const tipoNome = TIPO.toLowerCase().trim()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ç/g, 'c')
+    document.getElementById('btn-voltar').href = `../${tipoNome}/${tipoNome}.html`
 
     configurarCanvas()
     carregarValvulas()
@@ -117,26 +124,26 @@ function renderizarLista() {
     lista.innerHTML = resultado.map(renderCard).join('')
 }
 
-// Retorna as classes do badge de acordo com o status
+// Retorna a classe CSS do badge de acordo com o status
 function classesBadge(status) {
-    if (status === 'Pronta'  || status === 'Normal')           return 'bg-[#a5d6a7] text-[#1b5e20] border-[#4caf50]'
-    if (status === 'Em manutenção' || status === 'Manutenção') return 'bg-yellow-100 text-yellow-800 border-yellow-500'
-    if (status === 'Substituída')                              return 'bg-blue-100 text-blue-700 border-blue-400'
-    if (status === 'Entregue')                                 return 'bg-purple-100 text-purple-700 border-purple-400'
-    return                                                            'bg-red-100 text-red-700 border-red-400'
+    if (status === 'Em manutenção' || status === 'Manutenção') return 'badge badge-manutencao'
+    if (status === 'Descartada')                               return 'badge badge-descartada'
+    if (status === 'Entregue')                                 return 'badge badge-entregue'
+    if (status === 'Pronta'  || status === 'Normal')           return 'badge badge-pronta'
+    if (status === 'Substituída')                              return 'badge badge-substituida'
+    return                                                            'badge badge-estoque'
 }
 
-// Rótulo legível do status (com emoji)
+// Rótulo legível do status
 function labelStatus(status) {
     const map = {
-        'Em manutenção': '🔧 Em manutenção',
-        'Pronta':        '✅ Pronta',
-        'Substituída':   '🔄 Substituída',
-        'Descartada':    '🗑️ Descartada',
-        'Entregue':      '📦 Entregue',
-        // retrocompatibilidade
+        'Em manutenção': '⚙ Em manutenção',
+        'Pronta':        '✓ Pronta',
+        'Substituída':   '↺ Substituída',
+        'Descartada':    '✕ Descartada',
+        'Entregue':      '✓ Entregue',
         'Normal':        'Normal',
-        'Manutenção':    '🔧 Manutenção',
+        'Manutenção':    '⚙ Manutenção',
         'Inativa':       'Inativa',
     }
     return map[status] || status
@@ -146,53 +153,44 @@ function labelStatus(status) {
 function renderCard(v) {
     const infoSecundaria = [v.marca, v.polegada].filter(Boolean).join(' · ')
 
-    const acaoRetirada = v.status === 'Descartada' ? '' : v.retirada_por
-        ? `<div class="flex items-center gap-2">
-               <span class="text-[10px] tracking-wider text-[#388e3c] uppercase">
-                   Retirada por: <span class="text-[#1b5e20] normal-case">${v.retirada_por}</span>
-               </span>
-               <button class="btn-ver-assinatura text-[#2e7d32] hover:text-[#1b5e20] transition-colors" data-id="${v.id}" title="Ver assinatura">
-                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                   </svg>
-               </button>
-           </div>`
-        : `<button class="btn-retirar text-[10px] tracking-widest uppercase border border-yellow-600 text-yellow-700 px-3 py-1 hover:bg-yellow-100 transition-all cursor-pointer" data-id="${v.id}">
-               Registrar Retirada
-           </button>`
+    const svgRelogio = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke-width="1.8"/></svg>`
+    const svgEditar  = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke-width="2"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke-width="2"/></svg>`
+    const svgLixeira = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6" stroke-width="1.8"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" stroke-width="1.8"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2" stroke-width="1.8"/></svg>`
+    const svgCaneta  = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+
+    let footerLeft = '<span></span>'
+    if (v.status !== 'Descartada') {
+        if (v.retirada_por) {
+            footerLeft = `
+                <div class="valvula-retirada-info">
+                    <span>Retirada por: ${v.retirada_por}</span>
+                    <button class="btn-ver-assinatura" data-id="${v.id}" title="Ver assinatura">${svgCaneta}</button>
+                </div>`
+        } else if (v.status === 'Em manutenção' || v.status === 'Manutenção') {
+            footerLeft = `
+                <button class="btn-retirar" data-id="${v.id}">
+                    Registrar retirada
+                </button>`
+        }
+    }
 
     return `
-        <div class="card p-4">
-            <div class="flex items-start justify-between gap-3 mb-3">
-                <div class="flex-1 min-w-0">
-                    <h3 class="text-[#1b5e20] uppercase tracking-widest text-sm font-medium leading-snug">${v.nome}</h3>
-                    ${infoSecundaria ? `<p class="text-[#388e3c] text-xs mt-0.5">${infoSecundaria}</p>` : ''}
-                    ${v.observacoes ? `<p class="text-[#4caf50] text-xs italic mt-1">${v.observacoes}</p>` : ''}
-                    ${v.recebido_por ? `<p class="text-[10px] tracking-wider text-[#388e3c] uppercase mt-1">Recebido por: <span class="text-[#1b5e20] normal-case">${v.recebido_por}</span></p>` : ''}
+        <div class="valvula-card">
+            <div class="valvula-card-body">
+                <div class="valvula-card-header">
+                    <span class="valvula-codigo">${v.nome}</span>
+                    <span class="${classesBadge(v.status)}">${labelStatus(v.status)}</span>
                 </div>
-                <span class="inline-block shrink-0 px-2 py-0.5 text-[9px] tracking-widest uppercase border rounded-full ${classesBadge(v.status)}">
-                    ${labelStatus(v.status)}
-                </span>
+                ${infoSecundaria ? `<p class="valvula-meta">${infoSecundaria}</p>` : ''}
+                ${v.observacoes ? `<p class="valvula-obs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>${v.observacoes}</p>` : ''}
+                ${v.recebido_por ? `<p class="valvula-recebido">Recebido por: ${v.recebido_por}</p>` : ''}
             </div>
-            <div class="flex items-center justify-between gap-2 flex-wrap pt-2 border-t border-[#a5d6a7]">
-                <div class="flex items-center gap-2 flex-wrap">
-                    ${acaoRetirada}
-                </div>
-                <div class="flex items-center gap-2">
-                    <button class="btn-historico text-[#2e7d32] hover:text-[#1b5e20] transition-colors" data-id="${v.id}" title="Ver histórico">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </button>
-                    <button class="btn-editar text-[10px] tracking-widest uppercase border border-[#66bb6a] text-[#2e7d32] px-3 py-1 hover:bg-[#a5d6a7] transition-all cursor-pointer" data-id="${v.id}">
-                        Editar
-                    </button>
-                    <button class="btn-excluir text-red-400 hover:text-red-600 transition-colors" data-id="${v.id}" title="Excluir válvula">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                        </svg>
-                    </button>
+            <div class="valvula-card-footer">
+                ${footerLeft}
+                <div class="acoes-grupo">
+                    <button class="btn-historico" data-id="${v.id}" title="Ver histórico">${svgRelogio}</button>
+                    <button class="btn-editar" data-id="${v.id}">${svgEditar} Editar</button>
+                    <button class="btn-excluir" data-id="${v.id}" title="Excluir válvula">${svgLixeira}</button>
                 </div>
             </div>
         </div>
