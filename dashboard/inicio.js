@@ -1,5 +1,43 @@
 import { supabase } from '../supabase.js'
 
+async function carregarEstatisticasSedes() {
+    const elMarcas  = document.getElementById('stat-marcas-ativas')
+    const elItens   = document.getElementById('stat-itens-estoque')
+    const elAlertas = document.getElementById('stat-alertas-estoque')
+
+    const { data, error } = await supabase
+        .from('sedes_estoque')
+        .select('marca, quantidade')
+
+    if (error || !data) return
+
+    const marcasUnicas = new Set(data.map(s => s.marca)).size
+    const totalItens   = data.reduce((acc, s) => acc + (s.quantidade || 0), 0)
+    const alertas      = data.filter(s => s.quantidade <= 5).length
+
+    elMarcas.textContent  = marcasUnicas
+    elItens.textContent   = totalItens
+    elAlertas.textContent = alertas
+}
+
+async function carregarEstatisticasValvulas() {
+    const elManutencao = document.getElementById('stat-em-manutencao')
+    const elTotal      = document.getElementById('stat-total')
+
+    const { data, error } = await supabase
+        .from('valvulas')
+        .select('status')
+        .neq('status', 'Descartada')
+
+    if (error || !data) return
+
+    const emManutencao = data.filter(v => v.status === 'Em manutenção' || v.status === 'Manutenção').length
+    const total        = data.length
+
+    elManutencao.textContent = emManutencao
+    elTotal.textContent      = total
+}
+
 window.openDashboard = function(type) {
     const name = type.toLowerCase()
                      .trim()
@@ -19,12 +57,11 @@ window.mostrarSecao = function(secao) {
     document.getElementById('nav-valvulas').classList.toggle('active', secao === 'valvulas')
     document.getElementById('nav-sedes').classList.toggle('active', secao === 'sedes')
 
-    const wrapper = document.getElementById('wrapper-sininho')
+    if (secao === 'valvulas') carregarEstatisticasValvulas()
     if (secao === 'sedes') {
-        wrapper.classList.remove('hidden')
+        carregarEstatisticasSedes()
         carregarAlertas()
     } else {
-        wrapper.classList.add('hidden')
         document.getElementById('painel-alertas').classList.add('translate-x-full')
         document.getElementById('overlay-painel').classList.add('hidden')
     }
@@ -65,6 +102,9 @@ async function carregarAlertas() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    carregarEstatisticasValvulas()
+    carregarEstatisticasSedes()
+
     const secaoInicial = new URLSearchParams(window.location.search).get('secao')
     if (secaoInicial) window.mostrarSecao(secaoInicial)
 

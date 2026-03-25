@@ -1,13 +1,16 @@
 body {
-    background-color: #e8f5e9;
+    background-color: #f4f7f4;
+    font-family: 'Lato', sans-serif;
 }
 
-/* ---- Sidebar ---- */
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
 .sidebar {
     width: 80px;
     min-height: 100vh;
-    background: #c8e6c9;
-    border-right: 1px solid #a5d6a7;
+    background: #1a5c32;
+    border-right: 1px solid #154d29;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,14 +33,15 @@ body {
 .sidebar-logo {
     width: 36px;
     height: 36px;
-    background: #2e7d32;
-    border-radius: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #e8f5e9;
+    color: white;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
     letter-spacing: 0.05em;
 }
 
@@ -57,11 +61,11 @@ body {
     gap: 0.35rem;
     width: 60px;
     padding: 0.75rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 6px;
     border: 1px solid transparent;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: #388e3c;
+    color: rgba(255,255,255,0.6);
     background: transparent;
 }
 
@@ -71,10 +75,10 @@ body {
 }
 
 .sidebar-item span {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #2e7d32;
+    color: rgba(255,255,255,0.6);
     opacity: 0;
     max-height: 0;
     overflow: hidden;
@@ -88,50 +92,324 @@ body {
 
 .sidebar-item:hover,
 .sidebar-item.active {
-    background: #a5d6a7;
-    border-color: #66bb6a;
-    color: #1b5e20;
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.25);
+    color: white;
 }
 
 .sidebar-item.active span {
-    color: #1b5e20;
+    color: white;
+    opacity: 1;
+    max-height: 20px;
 }
 
-.valve-btn {
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar {
+    background: #1a5c32;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.topbar-titulo {
+    font-family: 'Merriweather', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.01em;
+}
+
+.topbar-icone {
+    width: 24px;
+    height: 24px;
+    color: #86efac;
+    flex-shrink: 0;
+}
+
+.status-badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #86efac;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.875rem;
+    border-radius: 100px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   CONTEÚDO DA SEÇÃO
+   ============================================================ */
+.secao-content {
+    padding: 2.5rem 3rem 3rem;
+    max-width: 960px;
+}
+
+/* ============================================================
+   INDICADOR DE PROGRESSO
+   ============================================================ */
+.progresso-wrapper {
+    margin-bottom: 2.5rem;
+}
+
+.passo-label {
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #4a7a59;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.barra-progresso-track {
+    height: 5px;
+    background: #c8e6c9;
+    border-radius: 3px;
+    width: 280px;
+    max-width: 100%;
+}
+
+.barra-progresso-fill {
+    height: 100%;
+    width: 33.33%;
+    background: #1a5c32;
+    border-radius: 3px;
+}
+
+/* ============================================================
+   TÍTULO E INSTRUÇÃO
+   ============================================================ */
+.secao-titulo {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a5c32;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+}
+
+.secao-instrucao {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05rem;
+    color: #4a7a59;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   GRID DE CARDS
+   ============================================================ */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.cards-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+    .cards-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .cards-grid,
+    .cards-grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .secao-content {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .secao-titulo {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================================
+   CARD DE ATIVO
+   ============================================================ */
+.ativo-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    background: #c8e6c9;
-    border: 1px solid #66bb6a;
-    border-radius: 4px;
-    transition: all 0.2s ease-in-out;
+    padding: 1.75rem 1.5rem 1.5rem;
+    background: white;
+    border: 2px solid #d4e8d8;
+    border-radius: 10px;
     cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    min-height: 165px;
+    text-align: center;
+    user-select: none;
 }
 
-.valve-btn svg {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 1rem;
-    color: #2e7d32;
-    transition: color 0.2s;
-}
-
-.valve-btn span {
-    font-size: 0.75rem;
-    font-weight: 300;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    color: #1b5e20;
-}
-
-.valve-btn:hover {
-    background: #a5d6a7;
-    border-color: #388e3c;
+.ativo-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 92, 50, 0.1);
+    border-color: #66bb6a;
 }
 
-.valve-btn:hover svg {
-    color: #1b5e20;
+.ativo-card.selecionado {
+    border-color: #1a5c32;
+    background: #f0f8f2;
+    box-shadow: 0 0 0 1px #1a5c32;
+}
+
+.check-icon {
+    position: absolute;
+    top: 0.875rem;
+    right: 0.875rem;
+    width: 26px;
+    height: 26px;
+    background: #1a5c32;
+    color: white;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.ativo-card.selecionado .check-icon {
+    display: flex;
+}
+
+.card-icone {
+    width: 40px;
+    height: 40px;
+    color: #1a5c32;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.card-titulo {
+    font-family: 'Merriweather', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a5c32;
+    margin-bottom: 0.4rem;
+}
+
+.card-descricao {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: #5a8a68;
+    line-height: 1.45;
+}
+
+/* ============================================================
+   LINHA DE AÇÕES
+   ============================================================ */
+.acoes-linha {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn-continuar {
+    background: #1a5c32;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    letter-spacing: 0.03em;
+    min-height: 48px;
+}
+
+.btn-continuar:disabled {
+    background: #b2cfba;
+    cursor: not-allowed;
+    color: #e8f5e9;
+}
+
+.btn-continuar:not(:disabled):hover {
+    background: #154d29;
+}
+
+.btn-ver-todos {
+    background: transparent;
+    color: #1a5c32;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.9rem 1.5rem;
+    border-radius: 6px;
+    border: 2px solid #1a5c32;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    min-height: 48px;
+}
+
+.btn-ver-todos:hover {
+    background: #edf6ef;
+}
+
+.link-ajuda {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #4a7a59;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-underline-offset: 3px;
+}
+
+.link-ajuda:hover {
+    color: #1a5c32;
+}
+
+/* ============================================================
+   RODAPÉ DE ESTATÍSTICAS
+   ============================================================ */
+.rodape-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 1.75rem;
+    border-top: 1.5px solid #c8e6c9;
+    flex-wrap: wrap;
+}
+
+.stat-numero {
+    display: block;
+    font-family: 'Merriweather', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a5c32;
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    color: #5a8a68;
+    margin-top: 0.3rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }

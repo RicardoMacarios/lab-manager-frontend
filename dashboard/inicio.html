@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V-Manager | Início</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="inicio.css">
 </head>
-<body class="bg-[#e8f5e9] text-[#1b5e20] font-sans antialiased">
+<body class="bg-[#f4f7f4] text-[#1a5c32] antialiased">
 
     <!-- Botão 3 pontinhos -->
     <button id="btn-menu" class="fixed top-4 left-4 z-50 flex flex-col gap-1 cursor-pointer p-1">
-        <span class="w-1 h-1 rounded-full bg-[#2e7d32]"></span>
-        <span class="w-1 h-1 rounded-full bg-[#2e7d32]"></span>
-        <span class="w-1 h-1 rounded-full bg-[#2e7d32]"></span>
+        <span class="w-1 h-1 rounded-full bg-white"></span>
+        <span class="w-1 h-1 rounded-full bg-white"></span>
+        <span class="w-1 h-1 rounded-full bg-white"></span>
     </button>
 
-    <!-- Overlay -->
+    <!-- Overlay sidebar -->
     <div id="overlay-sidebar" class="fixed inset-0 z-30 hidden"></div>
 
     <div class="flex min-h-screen">
@@ -46,111 +49,237 @@
         </aside>
 
         <!-- Conteúdo principal -->
-        <main class="flex-1 flex flex-col items-center justify-center p-6">
+        <main class="flex-1 flex flex-col">
 
-            <!-- Seção: Válvulas -->
-            <div id="secao-valvulas">
-                <header class="text-center mb-16">
-                    <p class="text-[#388e3c] font-mono text-[10px] tracking-[0.3em] uppercase mb-2">Gerenciamento de Válvulas</p>
-                    <h1 class="text-2xl font-light text-[#1b5e20] tracking-widest uppercase">Selecione o Ativo</h1>
-                    <div class="h-[1px] w-12 bg-[#4caf50] mx-auto mt-3"></div>
-                </header>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-4xl">
-                    <button onclick="openDashboard('Manual')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <rect x="4" y="10" width="16" height="4" rx="1"/>
-                            <line x1="12" y1="4" x2="12" y2="10"/>
-                            <line x1="12" y1="14" x2="12" y2="20"/>
-                            <line x1="8" y1="4" x2="16" y2="4"/>
-                        </svg>
-                        <span>Manual</span>
-                    </button>
-                    <button onclick="openDashboard('Esfera')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <!-- ===================== SEÇÃO: VÁLVULAS ===================== -->
+            <div id="secao-valvulas" class="flex flex-col flex-1">
+
+                <!-- Topbar -->
+                <div class="topbar">
+                    <div class="flex items-center gap-3">
+                        <svg class="topbar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="8"/>
                             <path d="M12 4v16M4 12h16"/>
                         </svg>
-                        <span>Esfera</span>
-                    </button>
-                    <button onclick="openDashboard('Borboleta')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <circle cx="12" cy="12" r="8"/>
-                            <ellipse cx="12" cy="12" rx="2" ry="6"/>
-                        </svg>
-                        <span>Borboleta</span>
-                    </button>
+                        <span class="topbar-titulo">Gerenciamento de Válvulas</span>
+                    </div>
+                    <span class="status-badge">● Sistema funcionando</span>
+                </div>
+
+                <!-- Conteúdo -->
+                <div class="secao-content">
+
+                    <!-- Progresso -->
+                    <div class="progresso-wrapper">
+                        <span class="passo-label">Passo 1 de 3</span>
+                        <div class="barra-progresso-track">
+                            <div class="barra-progresso-fill"></div>
+                        </div>
+                    </div>
+
+                    <h1 class="secao-titulo">Qual tipo de válvula?</h1>
+                    <p class="secao-instrucao">Clique no tipo de válvula que deseja gerenciar</p>
+
+                    <!-- Cards -->
+                    <div class="cards-grid">
+                        <div class="ativo-card" id="card-valvula-manual" onclick="selecionarValvula('Manual')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="4" y="10" width="16" height="4" rx="1"/>
+                                <line x1="12" y1="4" x2="12" y2="10"/>
+                                <line x1="12" y1="14" x2="12" y2="20"/>
+                                <line x1="8" y1="4" x2="16" y2="4"/>
+                            </svg>
+                            <h3 class="card-titulo">Manual</h3>
+                        </div>
+                        <div class="ativo-card" id="card-valvula-esfera" onclick="selecionarValvula('Esfera')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="8"/>
+                                <path d="M12 4v16M4 12h16"/>
+                            </svg>
+                            <h3 class="card-titulo">Esfera</h3>
+                        </div>
+                        <div class="ativo-card" id="card-valvula-borboleta" onclick="selecionarValvula('Borboleta')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="8"/>
+                                <ellipse cx="12" cy="12" rx="2" ry="6"/>
+                            </svg>
+                            <h3 class="card-titulo">Borboleta</h3>
+                        </div>
+                    </div>
+
+                    <!-- Ações -->
+                    <div class="acoes-linha">
+                        <button id="btn-continuar-valvulas" class="btn-continuar" disabled onclick="continuarValvulas()">Continuar →</button>
+                        <button class="btn-ver-todos">Ver todos</button>
+                    </div>
+
+                    <!-- Estatísticas -->
+                    <div class="rodape-stats">
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-em-manutencao">—</span>
+                            <span class="stat-label">Em manutenção</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-total">—</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Seção: Sedes -->
-            <div id="secao-sedes" class="hidden">
-                <header class="text-center mb-16">
-                    <p class="text-[#388e3c] font-mono text-[10px] tracking-[0.3em] uppercase mb-2">Estoque de Sedes</p>
-                    <h1 class="text-2xl font-light text-[#1b5e20] tracking-widest uppercase">Selecione a Marca</h1>
-                    <div class="h-[1px] w-12 bg-[#4caf50] mx-auto mt-3"></div>
-                </header>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
-                    <button onclick="openSedes('Zepponi')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <!-- ===================== SEÇÃO: SEDES ===================== -->
+            <div id="secao-sedes" class="flex flex-col flex-1 hidden">
+
+                <!-- Topbar -->
+                <div class="topbar">
+                    <div class="flex items-center gap-3">
+                        <svg class="topbar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <rect x="3" y="8" width="18" height="8" rx="2"/>
-                            <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
+                            <path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/>
                         </svg>
-                        <span>Zepponi</span>
-                    </button>
-                    <button onclick="openSedes('Zanardo')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <rect x="3" y="8" width="18" height="8" rx="2"/>
-                            <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
-                        </svg>
-                        <span>Zanardo</span>
-                    </button>
-                    <button onclick="openSedes('RTS')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <rect x="3" y="8" width="18" height="8" rx="2"/>
-                            <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
-                        </svg>
-                        <span>RTS</span>
-                    </button>
-                    <button onclick="openSedes('Interativa')" class="valve-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <rect x="3" y="8" width="18" height="8" rx="2"/>
-                            <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
-                        </svg>
-                        <span>Interativa</span>
-                    </button>
+                        <span class="topbar-titulo">Estoque de Sedes</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="status-badge">● Sistema funcionando</span>
+                        <button id="btn-sininho" class="relative w-9 h-9 bg-white/15 border border-white/25 rounded-full flex items-center justify-center text-white hover:bg-white/25 transition-all cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                            <span id="badge-sininho" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] rounded-full flex items-center justify-center font-medium"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Conteúdo -->
+                <div class="secao-content">
+
+                    <!-- Progresso -->
+                    <div class="progresso-wrapper">
+                        <span class="passo-label">Passo 1 de 3</span>
+                        <div class="barra-progresso-track">
+                            <div class="barra-progresso-fill"></div>
+                        </div>
+                    </div>
+
+                    <h1 class="secao-titulo">Qual a marca da sede?</h1>
+                    <p class="secao-instrucao">Clique na marca que deseja consultar no estoque</p>
+
+                    <!-- Cards -->
+                    <div class="cards-grid cards-grid-4">
+                        <div class="ativo-card" id="card-sede-zepponi" onclick="selecionarSede('Zepponi')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="8" width="18" height="8" rx="2"/>
+                                <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
+                                <line x1="9" y1="12" x2="15" y2="12"/>
+                            </svg>
+                            <h3 class="card-titulo">Zepponi</h3>
+                        </div>
+                        <div class="ativo-card" id="card-sede-zanardo" onclick="selecionarSede('Zanardo')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="8" width="18" height="8" rx="2"/>
+                                <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
+                                <line x1="9" y1="12" x2="15" y2="12"/>
+                            </svg>
+                            <h3 class="card-titulo">Zanardo</h3>
+                        </div>
+                        <div class="ativo-card" id="card-sede-rts" onclick="selecionarSede('RTS')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="8" width="18" height="8" rx="2"/>
+                                <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
+                                <line x1="9" y1="12" x2="15" y2="12"/>
+                            </svg>
+                            <h3 class="card-titulo">RTS</h3>
+                        </div>
+                        <div class="ativo-card" id="card-sede-interativa" onclick="selecionarSede('Interativa')">
+                            <span class="check-icon">✓</span>
+                            <svg class="card-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="8" width="18" height="8" rx="2"/>
+                                <path d="M8 8V6a1 1 0 011-1h6a1 1 0 011 1v2"/>
+                                <line x1="9" y1="12" x2="15" y2="12"/>
+                            </svg>
+                            <h3 class="card-titulo">Interativa</h3>
+                        </div>
+                    </div>
+
+                    <!-- Ações -->
+                    <div class="acoes-linha">
+                        <button id="btn-continuar-sedes" class="btn-continuar" disabled onclick="continuarSedes()">Continuar →</button>
+                        <button class="btn-ver-todos">Ver todos</button>
+                    </div>
+
+                    <!-- Estatísticas -->
+                    <div class="rodape-stats">
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-marcas-ativas">—</span>
+                            <span class="stat-label">Marcas ativas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-itens-estoque">—</span>
+                            <span class="stat-label">Itens em estoque</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero" id="stat-alertas-estoque">—</span>
+                            <span class="stat-label">Alertas de baixo estoque</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
         </main>
     </div>
 
-    <!-- Sininho de alertas (visível só na seção Sedes) -->
-    <div id="wrapper-sininho" class="fixed top-5 right-5 z-40 hidden">
-        <button id="btn-sininho" class="relative w-9 h-9 bg-[#c8e6c9] border border-[#66bb6a] rounded-full flex items-center justify-center text-[#2e7d32] hover:bg-[#a5d6a7] transition-all cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-            </svg>
-            <span id="badge-sininho" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] rounded-full flex items-center justify-center font-medium"></span>
-        </button>
-    </div>
 
     <!-- Painel lateral de alertas -->
-    <div id="painel-alertas" class="fixed top-0 right-0 h-full w-72 bg-[#e8f5e9] border-l border-[#a5d6a7] shadow-xl z-50 flex flex-col translate-x-full transition-transform duration-300">
-        <div class="flex items-center justify-between px-5 py-4 border-b border-[#a5d6a7]">
+    <div id="painel-alertas" class="fixed top-0 right-0 h-full w-80 bg-white border-l border-[#c8e6c9] shadow-xl z-50 flex flex-col translate-x-full transition-transform duration-300">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-[#c8e6c9]">
             <div>
-                <p class="text-[9px] tracking-[0.2em] uppercase text-[#388e3c]">Alertas</p>
-                <p class="text-sm font-light text-[#1b5e20] tracking-widest uppercase mt-0.5">Estoque Baixo</p>
+                <p class="text-[9px] tracking-[0.2em] uppercase text-[#4a7a59] font-semibold" style="font-family:'Lato',sans-serif">Alertas</p>
+                <p class="text-base font-bold text-[#1a5c32] mt-0.5" style="font-family:'Merriweather',serif">Estoque Baixo</p>
             </div>
-            <button id="btn-fechar-painel" class="text-[#4caf50] hover:text-[#1b5e20] transition-colors cursor-pointer">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="1.5"/></svg>
+            <button id="btn-fechar-painel" class="text-[#4a7a59] hover:text-[#1a5c32] transition-colors cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="1.5"/></svg>
             </button>
         </div>
         <div id="lista-alertas" class="flex-1 overflow-y-auto"></div>
     </div>
 
-    <!-- Overlay -->
+    <!-- Overlay alertas -->
     <div id="overlay-painel" class="fixed inset-0 bg-black/20 z-40 hidden"></div>
 
+    <script>
+        let valvulaSelecionada = null;
+        let sedeSelecionada = null;
+
+        window.selecionarValvula = function(tipo) {
+            valvulaSelecionada = tipo;
+            document.querySelectorAll('#secao-valvulas .ativo-card').forEach(c => c.classList.remove('selecionado'));
+            document.getElementById('card-valvula-' + tipo.toLowerCase()).classList.add('selecionado');
+            document.getElementById('btn-continuar-valvulas').disabled = false;
+        }
+
+        window.continuarValvulas = function() {
+            if (valvulaSelecionada) window.openDashboard(valvulaSelecionada);
+        }
+
+        window.selecionarSede = function(marca) {
+            sedeSelecionada = marca;
+            document.querySelectorAll('#secao-sedes .ativo-card').forEach(c => c.classList.remove('selecionado'));
+            document.getElementById('card-sede-' + marca.toLowerCase()).classList.add('selecionado');
+            document.getElementById('btn-continuar-sedes').disabled = false;
+        }
+
+        window.continuarSedes = function() {
+            if (sedeSelecionada) window.openSedes(sedeSelecionada);
+        }
+    </script>
     <script type="module" src="inicio.js"></script>
 </body>
 </html>
